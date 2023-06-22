@@ -143,8 +143,21 @@ function getLastDigit(value) {
  *     '37'     => 37
  * '-525.5'     => -525.5
  */
-function parseNumberFromString(/* value */) {
-  throw new Error('Not implemented');
+function parseNumberFromString(value) {
+  let res;
+  if (value.indexOf('.') === -1) {
+    res = Number.parseInt(value, 10);
+  } else {
+    const arr = value.split('.');
+    const whole = Number.parseInt(arr[0], 10);
+    const fractional = Number.parseInt(arr[1], 10) / 10 ** arr[1].length;
+    if (whole > 0) {
+      res = whole + fractional;
+    } else {
+      res = whole - fractional;
+    }
+  }
+  return res;
 }
 
 /**
